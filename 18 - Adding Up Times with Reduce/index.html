@@ -62,31 +62,32 @@
       <li data-time="5:05">Video 54</li>
       <li data-time="6:03">Video 55</li>
       <li data-time="12:39">Video 56</li>
-      <li data-time="1:56">Video 57</li>
+      <li data-time="1:53">Video 57</li>
       <li data-time="4:04">Video 58</li>
     </ul>
 
     <script>
-      const timeNodes = [...document.querySelectorAll('[data-time]')];
-      // const timeNodes = Array.from(document.querySelectorAll('[data-time]')]);
-      const seconds = timeNodes
-        .map((node) => node.dataset.time)
-        .map((timeCode) => {
-          const [mins, secs] = timeCode.split(':').map(parseFloat);
-          return mins * 60 + secs;
+      const times = [...document.querySelectorAll('li')];
+      const fullTime = times
+        .map((time) => {
+          return time.dataset.time;
         })
-        .reduce((total, seconds) => {
-          return total + seconds;
+        .map((time) => {
+          const [mins, secs] = time.split(':').map(parseFloat);
+          return mins * 60 + secs;
         });
+      const totalTime = fullTime.reduce((acc, time) => {
+        return acc + time;
+      });
 
-      let secondsLeft = seconds;
+      let secondsLeft = totalTime;
       const hours = Math.floor(secondsLeft / 3600);
       secondsLeft = secondsLeft % 3600;
 
       const mins = Math.floor(secondsLeft / 60);
       secondsLeft = secondsLeft % 60;
 
-      console.log(hours, mins, secondsLeft);
+      const seconds = secondsLeft % 60;
     </script>
   </body>
 </html>
