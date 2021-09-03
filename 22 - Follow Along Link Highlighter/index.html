@@ -53,15 +53,15 @@
 
       function highlightlink() {
         const linkCoords = this.getBoundingClientRect();
-        const coords = {
-          width: linkCoords.width,
-          height: linkCoords.height,
-          top: linkCoords.top + window.scrollY,
-          left: linkCoords.left + window.scrollX,
-        };
-        highlight.style.width = `${coords.width}px`;
-        highlight.style.height = `${coords.height}px`;
-        highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
+        const width = linkCoords.width;
+        const height = linkCoords.height;
+        const left = linkCoords.left + window.scrollX;
+        const top = linkCoords.top + window.scrollY;
+
+        highlight.style.width = `${width}px`;
+        highlight.style.height = `${height}px`;
+        highlight.style.left = `${left}px`;
+        highlight.style.top = `${top}px`;
       }
 
       triggers.forEach((a) => {
