@@ -25,20 +25,21 @@
       const bar = speed.querySelector('.speed-bar');
       const video = document.querySelector('.flex');
 
-      function handleMove(e) {
-        const y = e.pageY - this.offsetTop;
-        const percent = y / this.offsetHeight;
-        const min = 0.4;
-        const max = 4;
-        const height = Math.round(percent * 100);
+      function handleSpeed(e) {
+        const level = e.pageY - this.offsetTop;
+        const perc = level / this.offsetHeight;
+        const height = Math.round(perc * 100);
         bar.style.height = `${height}%`;
 
-        const playbackRate = percent * (max - min) + min;
-        video.playbackRate = playbackRate;
-        bar.textContent = `${playbackRate.toFixed(2)}x`;
+        const min = 0.4;
+        const max = 4;
+
+        const value = perc * (max - min) + min;
+        video.playbackRate = value;
+        bar.textContent = `${value.toFixed(2)}x`;
       }
 
-      speed.addEventListener('mousemove', handleMove);
+      speed.addEventListener('mousemove', handleSpeed);
     </script>
   </body>
 </html>
